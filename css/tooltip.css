@@ -1,0 +1,85 @@
+.tooltip {
+    --tt-width: 200px;
+	--tt-height: 250px;
+	--tt-columns: 3;
+	--tt-rows: 4;
+	--tt-bg-color: #4d25b0;
+	--tt-text-color: #abcb19;
+	position: absolute;
+	pointer-events: none;
+	opacity: 0;
+	top: 50%;
+	left: 50%;
+	width: var(--tt-width);
+	height: var(--tt-height);
+	display: grid;
+	grid-template-areas: 'tooltip';
+}
+
+.tooltip--style-alt {
+	--tt-bg-color: #94ad24;
+    --tt-text-color: #2e3023;
+}
+
+.tooltip--show {
+	opacity: 1;
+}
+
+.tooltip__bg {
+	grid-area: tooltip;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(var(--tt-columns), 1fr);
+	grid-template-rows: repeat(var(--tt-rows), 1fr);
+	background: var(--tt-bg-color);
+}
+
+.js .tooltip__bg {
+	background: transparent;
+}
+
+.tooltip__bg div {
+	background: var(--tt-bg-color);
+    outline: 1px solid var(--tt-bg-color); /* Fixes the gap in FF */
+}
+
+.tooltip__content {
+	grid-area: tooltip;
+	color: var(--tt-text-color);
+	position: relative;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.tooltip__content-title {
+	font-weight: normal;
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+.tooltip__content-meta {
+	margin: 0;
+}
+
+.tooltip__content-desc {
+	margin: auto 0 0 0;
+}
+
+@media screen and (min-width: 53em) {
+    .tooltip {
+        --tt-width: 290px;
+        --tt-height: 330px;
+    }
+
+    .tooltip__content {
+        padding: 2rem;
+    }
+    
+    .tooltip__content-title {
+        font-size: 2rem;
+    }
+    
+}
