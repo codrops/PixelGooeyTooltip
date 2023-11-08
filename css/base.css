@@ -1,0 +1,441 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 14px;
+	--color-text: #8572b2;
+	--color-bg: #0f0026;
+	--color-link: #abcb1a;
+	--color-link-hover: #fff;
+	--color-trigger: #d2d2d2;
+	--color-ui-bg: rgba(153, 71, 235, 0);
+	--color-ui-border: #4d25b0;
+	--color-ui-border-deco: #abcb1a;
+	--color-ui-meta: #58487e;
+	--color-ring: #abcb1a;
+}
+
+html,
+body,
+main {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: "lores-12", sans-serif;
+	text-transform: uppercase;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: 100%;
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+	overflow: hidden;
+}
+
+p {
+	margin: 0 0 0.5rem;
+}
+
+/* Page Loader */
+.js .loading::before,
+.js .loading::after {
+	content: '';
+	position: fixed;
+	z-index: 1000;
+}
+
+.js .loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js .loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: var(--color-link);
+	animation: loaderAnim 0.7s linear infinite alternate forwards;
+
+}
+
+@keyframes loaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5, 0.5, 1);
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--color-link);
+	outline: none;
+	cursor: pointer;
+}
+
+a::before {
+	content: "[";
+}
+
+a::after {
+	content: "]";
+}
+
+a:hover {
+	color: var(--color-link-hover);
+	outline: none;
+}
+
+/* Better focus styles from https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible */
+a:focus {
+	/* Provide a fallback style for browsers
+	 that don't support :focus-visible */
+	outline: none;
+	background: lightgrey;
+}
+
+a:focus:not(:focus-visible) {
+	/* Remove the focus indicator on mouse-focus for browsers
+	 that do support :focus-visible */
+	background: transparent;
+}
+
+a:focus-visible {
+	/* Draw a very noticeable focus style for
+	 keyboard-focus on browsers that do support
+	 :focus-visible */
+	outline: 2px solid red;
+	background: transparent;
+}
+
+.unbutton {
+	background: none;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+.unbutton:focus {
+	outline: none;
+}
+
+main {
+	padding: 1rem;
+	gap: 1rem;
+	display: grid;
+	height: 100vh;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: 'frame' 'content';
+	background: linear-gradient(rgb(75 55 231 / 10%) 50%, rgb(34 36 69) 50%), linear-gradient(90deg, rgb(64 55 55 / 9%), rgb(64 181 64 / 3%), rgba(0, 0, 255, 0.06));
+	background-size: 100% 2px, 3px 100%;
+}
+
+.ui {
+	position: relative;
+	border: 1px solid var(--color-ui-border);
+	background: var(--color-ui-bg);
+	padding: 2rem;
+	overflow: hidden;
+}
+
+.ui::before,
+.ui::after {
+	width: 10px;
+	height: 10px;
+	content: '';
+	border: 1px solid var(--color-ui-border-deco);
+	position: absolute;
+}
+
+.ui::before {
+	top: -5px;
+	left: -5px;
+	border-right: 0;
+	border-bottom: 0;
+}
+
+.ui::after {
+	bottom: -5px;
+	right: -5px;
+	border-top: 0;
+	border-left: 0;
+}
+
+.ui--small {
+	font-size: 0.75rem;
+}
+
+.meta {
+	display: none;
+}
+
+.meta--1 {
+	grid-area: meta-1;
+}
+
+.meta--2 {
+	grid-area: meta-2;
+}
+
+.meta--3 {
+	grid-area: meta-3;
+}
+
+.meta--4 {
+	grid-area: meta-4;
+}
+
+.meta h2 {
+	margin: 0;
+}
+
+strong::before {
+	content: './_';
+}
+
+.frame {
+	grid-area: frame;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-areas: 'title' 'prev' 'back' 'sponsor' 'demos';
+	grid-gap: 0.5rem;
+	align-content: start;
+}
+
+body #cdawrap {
+	justify-self: start;
+}
+
+.frame__title {
+	grid-area: title;
+	font-size: inherit;
+	margin: 0;
+	font-weight: inherit;
+}
+
+.frame__back {
+	grid-area: back;
+}
+
+.frame__prev {
+	grid-area: prev;
+}
+
+.content {
+	grid-area: content;
+	position: relative;
+	height: 100%;
+}
+
+.content__inner {
+	height: 100%;
+	position: relative;
+	padding-right: 2rem;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.content p {
+	font-size: 1.25rem;
+	margin: 0;
+}
+
+.trigger {
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+	cursor: pointer;
+	color: var(--color-trigger);
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #aacb1964;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #abcb19;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #abcb19;
+}
+
+/* Animated globe by Mykl https://codepen.io/MB5/pen/LdaqRb */
+
+@keyframes spin {
+	to {
+		transform: rotateY(-360deg);
+	}
+}
+
+@keyframes opacity {
+	to {
+		opacity: 1;
+	}
+}
+
+.scene {
+	width: 80%;
+	height: auto;
+	aspect-ratio: 1;
+	margin: 20% auto 0;
+	perspective: 1000px;
+}
+
+.scene__inner {
+	width: 100%;
+	height: 100%;
+	transform: rotateX(24deg) rotateY(0deg);
+	transform-style: preserve-3d;
+}
+
+.globe {
+	position: relative;
+	width: 70%;
+	height: 70%;
+	margin: 0 auto;
+	transform-style: preserve-3d;
+	animation: spin 25s 0ms infinite linear;
+}
+
+.ring {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 1px;
+	border-style: dotted;
+	border-radius: 50%;
+	color: var(--color-ring);
+	animation: opacity 0.75s forwards ease-in-out;
+	opacity: 0;
+}
+
+.ring:nth-child(1) {
+	transform: rotateY(4deg);
+}
+
+.ring:nth-child(2) {
+	transform: rotateY(30deg);
+}
+
+.ring:nth-child(3) {
+	transform: rotateY(56deg);
+}
+
+.ring:nth-child(4) {
+	transform: rotateY(82deg);
+}
+
+.ring:nth-child(5) {
+	transform: rotateY(108deg);
+}
+
+.ring:nth-child(6) {
+	transform: rotateY(134deg);
+}
+
+.ring:nth-child(7) {
+	transform: rotateY(160deg);
+}
+
+.glitch {
+	animation-name: glitch-anim;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.glitch--1 {
+	animation-delay: 16s;
+}
+
+.glitch--2 {
+	animation-delay: 12s;
+}
+
+@keyframes glitch-anim {
+	0% { 
+		transform: translate3d(-5px,0,0) scale3d(-1,-1,1);
+		-webkit-clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
+		clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
+	}
+	2% {
+		-webkit-clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+		clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+	}
+	4% {
+		-webkit-clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+		clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+	}
+	5% {
+		-webkit-clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+		clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+	}
+	6% {
+		-webkit-clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+		clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+	}
+	7% {
+		-webkit-clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+		clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+	}
+	8% {
+		-webkit-clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+		clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+	}
+	9% {
+		-webkit-clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+		clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+	}
+	9.9% {
+		transform: translate3d(-5px,0,0) scale3d(-1,-1,1);
+	}
+	10%, 100% {
+		transform: translate3d(0,0,0) scale3d(1,1,1);
+		-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+	}
+}
+
+@media screen and (min-width: 53em) {
+	main {
+		grid-template-columns: 1fr 50vw 1fr;
+		grid-template-rows: auto auto 1fr;
+		grid-template-areas: 'frame content meta-4'
+							'meta-2 content meta-3'
+							'meta-2 content meta-1';
+	}
+	.meta {
+		display: block;
+	}
+}
